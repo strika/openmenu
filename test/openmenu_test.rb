@@ -1,7 +1,7 @@
 require "test/unit"
 require "openmenu"
 
-class TestOpenMenu < Test::Unit::TestCase
+class OpenMenuTest < Test::Unit::TestCase
 
   def test_open_menu_parse
     @sample = File.open(File.expand_path("test/sample16.xml")) { |f| f.read }
