@@ -5,7 +5,7 @@ class TestOpenMenu < Test::Unit::TestCase
 
   def test_open_menu_parse
     @sample = File.open(File.expand_path("test/sample16.xml")) { |f| f.read }
-    @om = OpenMenu.parse(@sample)
+    @om = OpenMenu::OpenMenu.parse(@sample)
 
     assert_equal "sample", @om.uuid
     assert_equal "2013-01-03", @om.created_date
@@ -87,7 +87,7 @@ class TestOpenMenu < Test::Unit::TestCase
 
   def test_menu_parse
     @sample = File.open(File.expand_path("test/sample16.xml")) { |f| f.read }
-    @om = OpenMenu.parse(@sample)
+    @om = OpenMenu::OpenMenu.parse(@sample)
     menus = @om.menus
 
     assert_equal 'Main Menu', menus.first.name

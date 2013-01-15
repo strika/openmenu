@@ -1,9 +1,11 @@
 # -*- encoding: utf-8 -*-
 $:.push File.expand_path("../lib", __FILE__)
 
+require 'openmenu/version'
+
 Gem::Specification.new do |s|
   s.name = "openmenu"
-  s.version = "0.3.0"
+  s.version = OpenMenu::VERSION
   s.platform = Gem::Platform::RUBY
   s.authors = ["Nebojsa Stricevic"]
   s.email = ["nebojsa.stricevic@gmail.com"]
