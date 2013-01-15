@@ -1,22 +1,13 @@
 class OpenMenu
-  VERSION = '0.2.1'
+  VERSION = "0.3.0"
   include HappyMapper
   tag 'omf'
 
   attribute :uuid, String
-  attribute :date_created, String
+  attribute :created_date, String
   attribute :accuracy, Integer
-  attribute :private, String
-
-  # Public: Test if this OpenMenu is private
-  #
-  # Returns true if private.
-  def private?
-    private == 'private'
-  end
 
   element :version, Float, :deep => true
-
   element :restaurant_name, String, :deep => true
   element :brief_description, String, :deep => true
   element :full_description, String, :deep => true
@@ -56,18 +47,16 @@ class OpenMenu
     attribute :media, String
     attribute :height, Integer
     attribute :width, Integer
-
-    text_node :url, String
   end
   has_many :logos, Logo, :xpath => '//logo_urls'
-  
+
   # environment
   element :seating_quantity, Integer, :tag => 'seating_qty', :deep => true
   element :max_group_size, Integer, :deep => true
   element :smoking_allowed, String, :deep => true
   element :takeout_available, String, :deep => true
   element :delivery_available, String, :deep => true
-  
+
   class Delivery
     include HappyMapper
     tag 'delivery_available'
@@ -140,7 +129,7 @@ class OpenMenu
     end
   end
   element :parking, Parking
-  
+
   class OnlineReservation
     include HappyMapper
     tag 'online_reservation'
@@ -182,7 +171,7 @@ class OpenMenu
   class Menu
     include HappyMapper
     tag 'menu'
-    
+
     attribute :name, String
     attribute :uid, String
     attribute :currency, String, :tag => 'currency_symbol'
@@ -204,7 +193,7 @@ class OpenMenu
       element :end, String, :tag => 'menu_duration_time_end'
     end
     has_one :duration, Duration
-      
+
     class Group
       include HappyMapper
       tag 'menu_group'
@@ -262,7 +251,6 @@ class OpenMenu
           tag 'menu_item_allergy_information'
 
           attribute :allergens, String
-          text_node :information, String
         end # OpenMenu::Menu::Group::Item::Allergy
         has_one :allergy, Allergy
 
@@ -274,8 +262,6 @@ class OpenMenu
           attribute :height, Integer
           attribute :type, String
           attribute :media, String
-
-          text_node :url, String
         end # OpenMenu::Menu::Group::Item::Image
         has_many :images, Image
 

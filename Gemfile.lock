@@ -1,0 +1,20 @@
+PATH
+  remote: .
+  specs:
+    openmenu (0.3.0)
+      happymapper (>= 0.4.0)
+
+GEM
+  remote: http://rubygems.org/
+  specs:
+    happymapper (0.4.0)
+      libxml-ruby (~> 2.0)
+    libxml-ruby (2.4.0)
+    rake (10.0.3)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  openmenu!
+  rake (>= 10.0.3)
