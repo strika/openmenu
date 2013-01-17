@@ -117,8 +117,6 @@ class OpenMenuTest < Test::Unit::TestCase
     option_item = option.items.first
     assert_equal 'Italian', option_item.name
     assert_equal 1.00, option_item.additional_cost
-
-    item = group.items.first
   end
 
 end
