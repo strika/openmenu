@@ -6,4 +6,5 @@ tmp/**
 doc/**
 pkg/**
 
+.bundle
 vendor/bundle
