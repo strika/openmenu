@@ -1,5 +1,21 @@
 # OpenMenu Parser
 
+## Examples
+
+    restaurant = OpenMenu::Restaurant.find("20e54732-15bb-11e0-b40e-0018512e6b26")
+    restaurant.restaurant_name # => 'Fiorini'
+    restaurant.phone # => '212-308-0830'
+
+    menu = restaurant.menus.first
+    group = menu.groups.first
+    group.name # => 'Antipasti'
+    item = group.items.first
+    item.name # => 'Zuppa del Giorno'
+    item.description # => 'Soup of the day'
+    item.price # => 9.00
+
+For full supported API, please consult the [test file](https://github.com/strika/openmenu/blob/master/test/openmenu_test.rb).
+
 ## Licence
 
 (The MIT License)

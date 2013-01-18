@@ -90,7 +90,6 @@ class OpenMenuTest < Test::Unit::TestCase
   def test_menu_parse
     main_menu = @om.menus.first
 
-
     # Menu info
     assert_equal 'Main Menu', main_menu.name
     assert_equal '3e5d0b48-27f2-11e1-80ac-00163eeae34c', main_menu.uid
