@@ -3,10 +3,12 @@ require "openmenu"
 
 class OpenMenuTest < Test::Unit::TestCase
 
-  def test_open_menu_parse
+  def setup
     @sample = File.open(File.expand_path("test/sample16.xml")) { |f| f.read }
     @om = OpenMenu::OpenMenu.parse(@sample)
+  end
 
+  def test_open_menu_parse
     assert_equal "sample", @om.uuid
     assert_equal "2013-01-03", @om.created_date
     assert_equal 1, @om.accuracy
@@ -86,24 +88,26 @@ class OpenMenuTest < Test::Unit::TestCase
   end
 
   def test_menu_parse
-    @sample = File.open(File.expand_path("test/sample16.xml")) { |f| f.read }
-    @om = OpenMenu::OpenMenu.parse(@sample)
-    menus = @om.menus
+    main_menu = @om.menus.first
 
-    assert_equal 'Main Menu', menus.first.name
-    assert_equal '3e5d0b48-27f2-11e1-80ac-00163eeae34c', menus.first.uid
-    assert_equal 'USD', menus.first.currency
-    assert_equal 'en', menus.first.language
-    assert_equal '', menus.first.disabled
-    assert_equal false, menus.first.disabled?
-    assert_equal '', menus.first.description
-    assert_equal 'gratuity added for large parties', menus.first.note
 
-    assert_equal 'lunch-dinner', menus.first.duration.name
-    assert_equal '11:00', menus.first.duration.start
-    assert_equal '22:00', menus.first.duration.end
+    # Menu info
+    assert_equal 'Main Menu', main_menu.name
+    assert_equal '3e5d0b48-27f2-11e1-80ac-00163eeae34c', main_menu.uid
+    assert_equal 'USD', main_menu.currency
+    assert_equal 'en', main_menu.language
+    assert_equal '', main_menu.disabled
+    assert_equal false, main_menu.disabled?
+    assert_equal '', main_menu.description
+    assert_equal 'gratuity added for large parties', main_menu.note
 
-    group = menus.first.groups.first
+    # Duration
+    assert_equal 'lunch-dinner', main_menu.duration.name
+    assert_equal '11:00', main_menu.duration.start
+    assert_equal '22:00', main_menu.duration.end
+
+    # Menu groups
+    group = main_menu.groups.first
     assert_equal 'Appetizers', group.name
     assert_equal '2de4ae10-27f2-11e1-80ac-00163eeae34c', group.uid
     assert_equal '', group.disabled
@@ -111,7 +115,14 @@ class OpenMenuTest < Test::Unit::TestCase
     assert_equal '', group.description
     assert_equal '', group.note
 
-    option = menus.first.groups[2].options.first
+    # Menu group items
+    item = group.items.first
+    assert_equal 'Coconut Shrimp', item.name
+    assert_match /Crispy Coconut Shrimp/, item.description
+    assert_equal 7.95, item.price
+
+    # Options
+    option = main_menu.groups[2].options.first
     assert_equal 'Dressings', option.name
 
     option_item = option.items.first
